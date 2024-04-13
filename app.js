@@ -1,6 +1,5 @@
 
-
-window.addEventListenr("DOMContentLoaded", function (event) {
+window.addEventListener("DOMContentLoaded", function (event) {
     window.focus();
 
     let snakePositions;
@@ -64,5 +63,25 @@ window.addEventListenr("DOMContentLoaded", function (event) {
 
         contrastElement.innerText = `${Math.floor(contrast * 100)}%`;
         scoreElement.innerText = hardMode ? `H ${score}` : score;
+
+        for( const tile of tiles) setTile(tile);
+
+        setTile(tiles[applePosition], {
+            "background-color": color,
+            "border-radius": "50%"
+        });
+        
+        for(const i of snakePositions.slice(1)) {
+            const snakePart = tiles[1];
+            snakePart.style.backgroundColor = color;
+
+            if (i == snakePositions[snakePositions.length - 1])
+            snakePart.style.left = 0;
+            if(i == snakePositions[0])
+            snakePart.style.right = 0;
+        }
     }
+
+
+
 })
