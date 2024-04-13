@@ -1,0 +1,1 @@
+Réplica do clássico Jogo da Cobrinha que tive a oportunidade de fazer em meu tempo livre. Todos os créditos ao canal no Youtube: Hunor Márton Borbély (link para o canal: https://www.youtube.com/@HunorMartonBorbely).
