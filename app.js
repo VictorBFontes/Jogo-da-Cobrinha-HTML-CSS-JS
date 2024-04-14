@@ -72,7 +72,7 @@ window.addEventListener("DOMContentLoaded", function (event) {
         });
         
         for(const i of snakePositions.slice(1)) {
-            const snakePart = tiles[1];
+            const snakePart = tiles[i];
             snakePart.style.backgroundColor = color;
 
             if (i == snakePositions[snakePositions.length - 1])
@@ -90,14 +90,6 @@ window.addEventListener("DOMContentLoaded", function (event) {
                 "ArrowUp",
                 "ArrowRight",
                 "ArrowDown",
-                "A",
-                "a",
-                "W",
-                "w",
-                "D",
-                "d",
-                "S",
-                "s",
                 " ",
                 "H",
                 "h",
@@ -135,38 +127,38 @@ window.addEventListener("DOMContentLoaded", function (event) {
             return;
         }
 
-        if (event.key == "ArrowLeft" || event.key == "A" || event.key == "a" &&
-            inputs[inputs.length - 1] != "Left" &&
+        if (event.key == "ArrowLeft" &&
+            inputs[inputs.length - 1] != "left" &&
             headDirection() != "right"
         ) {
-            inputs.push("Left");
+            inputs.push("left");
             if (!gameStarted) startGame();
             return;
         }
 
-        if (event.key == "ArrowUp" || event.key == "W" || event.key == "w" &&
-            inputs[inputs.length - 1] != "Up" &&
+        if (event.key == "ArrowUp" &&
+            inputs[inputs.length - 1] != "up" &&
             headDirection() != "down"
         ) {
-            inputs.push("Up");
+            inputs.push("up");
             if (!gameStarted) startGame();
             return;
         }
 
-        if (event.key == "ArrowRight" || event.key == "D" || event.key == "d" &&
-            inputs[inputs.length - 1] != "Right" &&
+        if (event.key == "ArrowRight" &&
+            inputs[inputs.length - 1] != "right" &&
             headDirection() != "left"
         ) {
-            inputs.push("Right");
+            inputs.push("right");
             if (!gameStarted) startGame();
             return;
         }
 
-        if (event.key == "ArrowDown" || event.key == "S" || event.key == "s" &&
-            inputs[inputs.length - 1] != "Down" &&
+        if (event.key == "ArrowDown" &&
+            inputs[inputs.length - 1] != "down" &&
             headDirection() != "up"
         ) {
-            inputs.push("Down");
+            inputs.push("down");
             if (!gameStarted) startGame();
             return;
         }
@@ -185,10 +177,10 @@ window.addEventListener("DOMContentLoaded", function (event) {
             const totalElapsedTime = timestamp - startTimestamp;
             const timeElapsedSinceLastCall = timestamp - lastTimestamp;
 
-            const stepsShouldhaveTaken = Math.floor(totalElapsedTime / speed);
+            const stepsShouldHaveTaken = Math.floor(totalElapsedTime / speed);
             const percentageOfStep = (totalElapsedTime % speed) / speed;
 
-            if (stepsTaken != stepsShouldhaveTaken) {
+            if (stepsTaken != stepsShouldHaveTaken) {
                 stepAndTransition(percentageOfStep);
 
                 const headPosition = snakePositions[snakePositions.length - 1];
@@ -226,8 +218,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
             const changeMode = hardMode
             ? "Quer voltar ao modo normal? Pressione E para voltar."
             : "Preparado para o modo dificil!?? Presssione H para se desafiar.";
-            const followMe = 'Me siga! <a href="www.linkedin.com/in/jose-victor-barros-fontes", target="_blank >In: José Victor</a>. Github: <a href="https://github.com/VictorBFontes", target="_blank >VictorBFontes</a>.';
-            noteElement.innerHTML = `${error.message}. ${pressSpaceToStart} <div>${changeMode}</div> ${followMe}`;
+          //  const followMe = 'Meu Linkedin! <a href="www.linkedin.com/in/jose-victor-barros-fontes", target="_blank" >In: José Victor</a>. Github: <a href="https://github.com/VictorBFontes", target="_blank" >VictorBFontes</a>.';//
+            noteElement.innerHTML = `${error.message}. ${pressSpaceToStart} <div>${changeMode}</div>`;
             noteElement.style.opacity = 1;
             containerElement.style.opacity = 1;
         }
@@ -335,14 +327,14 @@ window.addEventListener("DOMContentLoaded", function (event) {
     }
 
     function getNextPosition() {
-        const headPosition = [snakePositions[snakePositions.length - 1]];
-        const snakeDirection =inputs.shift() || headDirection();
+        const headPosition = snakePositions[snakePositions.length - 1];
+        const snakeDirection = inputs.shift() || headDirection();
 
         switch (snakeDirection) {
 
             case "right" : {
                 const nextPosition = headPosition + 1;
-                if (nextPosition % width == 0) throw Error ("A cobra bateu com tudo na parede :(");
+                if (nextPosition % width == 0) throw Error("A cobra bateu com tudo na parede :(");
                 if (snakePositions.slice(1).includes(nextPosition))
                 throw Error("A cobra se mordeu...ouch");
             return nextPosition;
@@ -350,7 +342,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
              case "left" : {
                 const nextPosition = headPosition - 1;
-                if (nextPosition % width == width - 1 || nextPosition < 0) throw Error ("A cobra bateu com tudo na parede :(");
+                if (nextPosition % width == width - 1 || nextPosition < 0) 
+                throw Error ("A cobra bateu com tudo na parede :(");
                 if (snakePositions.slice(1).includes(nextPosition))
                 throw Error("A cobra se mordeu...ouch");
             return nextPosition;
@@ -358,7 +351,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
 
              case "down" : {
                 const nextPosition = headPosition + width;
-                if (nextPosition > width * height - 1) throw Error ("A cobra bateu com tudo na parede :(");
+                if (nextPosition > width * height - 1)
+                 throw Error ("A cobra bateu com tudo na parede :(");
                 if (snakePositions.slice(1).includes(nextPosition))
                 throw Error("A cobra se mordeu...ouch");
             return nextPosition;
