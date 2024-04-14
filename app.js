@@ -219,7 +219,8 @@ window.addEventListener("DOMContentLoaded", function (event) {
             ? "Quer voltar ao modo normal? Pressione E para voltar."
             : "Preparado para o modo dificil!?? Presssione H para se desafiar.";
           //  const followMe = 'Meu Linkedin! <a href="www.linkedin.com/in/jose-victor-barros-fontes", target="_blank" >In: José Victor</a>. Github: <a href="https://github.com/VictorBFontes", target="_blank" >VictorBFontes</a>.';//
-            noteElement.innerHTML = `${error.message}. ${pressSpaceToStart} <div>${changeMode}</div>`;
+          const msmForY = 'Love you, Lia <3';
+            noteElement.innerHTML = `${error.message}. ${pressSpaceToStart} <div>${changeMode}</div> ${msmForY}`;
             noteElement.style.opacity = 1;
             containerElement.style.opacity = 1;
         }
